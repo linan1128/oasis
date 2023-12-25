@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useAppStore } from '@/store/app.ts'
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
 const appStore = useAppStore()
 const collapse = computed(() => appStore.sidebarCollapse);
 const menus = [
@@ -45,20 +48,29 @@ const menus = [
   },
 ]
 
-const handleUpdateValue = () => {
-
+const selectedKeys = ref(null)
+const handleUpdateValue = (key: any, item: any) => {
+  router.push({ path: key });
 }
+import autoAnimate from "@formkit/auto-animate"
+const logoRef = ref()
+onMounted(() => {
+  autoAnimate(logoRef.value,{duration: 100})
+})
+const darkMod = computed(() => appStore.darkMod);
 </script>
 
 <template>
-  <div class="sidebar" :class="{'sidebar-collapse': collapse}">
+  <n-el tag="div" :style="{'background-color':darkMod?'':'rgb(0,20,40)'}" class="sidebar" :class="{'sidebar-collapse': collapse}">
 
-    <div class="logo" >
-      <img src="@/assets/vue.svg" alt="">
-      <transition name="fade">
-        <h1 v-show="!collapse">OASIS</h1>
-      </transition>
-
+    <div ref="logoRef" class="logo" >
+      <div v-if="collapse" style="display: flex;height: 100%">
+        <img src="@/assets/vue.svg" alt="" style="width: 36px">
+      </div>
+      <div v-else style="display: flex;height: 100%">
+        <img src="@/assets/vue.svg" alt="" style="width: 36px">
+        <n-el tag="div" style="display: flex;font-size: 30px;align-items: center;justify-content: center;color: var(--primary-color) ">OASIS</n-el>
+      </div>
     </div>
     <div class="scrollbar">
       <n-scrollbar>
@@ -69,14 +81,14 @@ const handleUpdateValue = () => {
             :collapsed-width="54"
             :collapsed-icon-size="20"
             :indent="24"
-            :inverted="false"
+            :inverted="true"
             :value='selectedKeys'
             @update:value="handleUpdateValue"
             :options="menus"
         />
       </n-scrollbar>
     </div>
-  </div>
+  </n-el>
 </template>
 
 <style lang="scss" scoped>
@@ -85,8 +97,10 @@ const handleUpdateValue = () => {
   position: fixed;
   top: 0;
   bottom: 0;
-  box-shadow: 2px 0 8px 0 #f5f5f5;
-  transition: width .3s cubic-bezier(.4, 0, .2, 1);
+  box-sizing: border-box;
+  background-color: var(--card-color);
+  transition: .3s var(--cubic-bezier-ease-in-out);
+  border-right: 1px solid var(--divider-color);
   .logo{
     height: 64px;
     display: flex;

@@ -3,3 +3,18 @@
   --sidebar-collapse-width: 64px;
   --navbar-height:64px;
 }
+
+.zoom-fade-enter-active,
+.zoom-fade-leave-active {
+  transition: all .5s;
+}
+
+.zoom-fade-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.zoom-fade-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}

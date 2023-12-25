@@ -11,13 +11,23 @@
     <modules>
         <module>oasis-web</module>
         <module>oasis-system</module>
+        <module>oasis-auth</module>
+        <module>oasis-model</module>
+        <module>oasis-datasource</module>
+        <module>oasis-cache</module>
+        <module>oasis-util</module>
     </modules>
 
     <properties>
+        <ossis.version>1.0</ossis.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springboot.version>2.7.18</springboot.version>
+        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+        <lombok.version>1.18.30</lombok.version>
+        <jjwt.version>0.9.0</jjwt.version>
+        <fastjson2.version>2.0.43</fastjson2.version>
     </properties>
 
     <dependencyManagement>
@@ -28,6 +38,26 @@
                 <version>${springboot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -22,6 +22,20 @@ const routes: RouteRecordRaw[] = [
                 }
             }
         ]
+    },
+    {
+        path: '/system',
+        component: Layout,
+        children:[
+            {
+                path: 'user',
+                name: 'User',
+                component: () => import('@/views/system/user/index.vue'),
+                meta: {
+                    title: '用户管理'
+                }
+            }
+        ]
     }
 ]
 

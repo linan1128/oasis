@@ -4,63 +4,30 @@
 
 <template>
   <div>
-    <n-space>
-      <n-button>Default</n-button>
-      <n-button type="tertiary">
-        Tertiary
-      </n-button>
-      <n-button type="primary">
-        Primary
-      </n-button>
-      <n-button type="info">
-        Info
-      </n-button>
-      <n-button type="success">
-        Success
-      </n-button>
-      <n-button type="warning">
-        Warning
-      </n-button>
-      <n-button type="error">
-        Error
-      </n-button>
-    </n-space>
-    <n-space vertical>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-      <n-card>没有标题</n-card>
-    </n-space>
+    <n-grid x-gap="12" :cols="4">
+      <n-gi>
+        <div class="light-green" />
+      </n-gi>
+      <n-gi>
+        <div class="green" />
+      </n-gi>
+      <n-gi>
+        <div class="light-green" />
+      </n-gi>
+      <n-gi>
+        <div class="green" />
+      </n-gi>
+    </n-grid>
   </div>
 </template>
 
 <style scoped>
-
+.light-green {
+  height: 108px;
+  background-color: rgba(0, 128, 0, 0.12);
+}
+.green {
+  height: 108px;
+  background-color: rgba(0, 128, 0, 0.24);
+}
 </style>
