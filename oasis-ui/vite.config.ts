@@ -35,4 +35,17 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src')
         }
     },
+    server: {
+        port: 80,
+        host: '0.0.0.0',
+        open: true,
+        proxy: {
+            // https://cn.vitejs.dev/config/#server-proxy
+            '/dev-api': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/dev-api/, '')
+            }
+        }
+    },
 })

@@ -16,8 +16,8 @@ const formCarSize = useElementSize(formCardRef)
 
 
 const setTableHeight = () => {
-  tableCardHeight.value = window.innerHeight - 108 - formCarSize.height.value -16
-  treeCardHeight.value = window.innerHeight - 108
+  tableCardHeight.value = window.innerHeight - 108 - formCarSize.height.value -16 -44
+  treeCardHeight.value = window.innerHeight - 108 -44
 }
 
 watch(WindowSize.height,setTableHeight)

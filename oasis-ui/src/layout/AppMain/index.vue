@@ -22,7 +22,7 @@ const darkMod = computed(() => appStore.darkMod);
 <style lang="scss" scoped>
 .app-main {
   position: fixed;
-  top: 64px;
+  top: 108px;
   left: var(--sidebar-width);
   right: 0;
   bottom: 0;

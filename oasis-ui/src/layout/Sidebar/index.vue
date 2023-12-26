@@ -69,7 +69,7 @@ const darkMod = computed(() => appStore.darkMod);
       </div>
       <div v-else style="display: flex;height: 100%">
         <img src="@/assets/vue.svg" alt="" style="width: 36px">
-        <n-el tag="div" style="display: flex;font-size: 30px;align-items: center;justify-content: center;color: var(--primary-color) ">OASIS</n-el>
+        <n-el tag="div" style="display: flex;font-size: 30px;align-items: center;justify-content: center;color: var(--primary-color);transition: .3s var(--cubic-bezier-ease-in-out); ">OASIS</n-el>
       </div>
     </div>
     <div class="scrollbar">
