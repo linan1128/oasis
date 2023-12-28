@@ -121,7 +121,7 @@ const data: TreeOption[] = [
                 :label-width="80"
                 :model="formValue"
             >
-              <n-grid :x-gap="12" :cols="4" :collapsed="formCollapsed">
+              <n-grid :x-gap="12" cols="2 m:2 l:3 xl:4" responsive="screen" :collapsed="formCollapsed">
                 <n-grid-item>
                   <n-form-item label="姓名" path="user.name">
                     <n-input v-model:value="formValue.user.name" placeholder="角色名称" />
@@ -161,7 +161,7 @@ const data: TreeOption[] = [
                   <n-form-item>
                     <div style="width: 100%;display: flex; justify-content: flex-end">
                       <n-space align="center">
-                        <n-button attr-type="button">
+                        <n-button type="primary"  attr-type="button">
                           查询
                         </n-button>
                         <n-button attr-type="button">

@@ -10,3 +10,15 @@ export const login = (username:string, password:string) =>{
         }
     })
 }
+export const logout = () =>{
+    return Axios({
+        url: '/auth/logout',
+        method: 'post',
+    })
+}
+export const getInfo = () =>{
+    return Axios({
+        url: '/auth/getInfo',
+        method: 'post',
+    })
+}

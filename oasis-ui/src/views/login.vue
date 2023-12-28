@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { PersonOutline, LockClosedOutline } from '@vicons/ionicons5';
-
+import { useRouter,useRoute } from "vue-router";
+import {useUserStore} from "@/store/user.ts";
+const userStore = useUserStore()
+const route = useRoute();
+const router = useRouter();
 const formRef = ref();
 const loading = ref(false);
 const loginForm = ref({
@@ -17,6 +21,9 @@ const handleSubmit = (e) => {
   formRef.value.validate((errors) => {
     if (!errors) {
       loading.value = true;
+      userStore.login(loginForm.value).then(()=>{
+        router.push({ path: "/"});
+      })
     }
   })
 }
@@ -46,7 +53,7 @@ const handleSubmit = (e) => {
           <n-input
               v-model:value="loginForm.password"
               type="password"
-              show-password-toggle
+              showPasswordOn="click"
               placeholder="请输入密码"
           >
             <template #prefix>

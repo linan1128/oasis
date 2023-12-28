@@ -12,14 +12,14 @@ const darkMod = computed(() => appStore.darkMod);
 <template>
   <n-el tag="div" class="navbar" :class="{'navbar-sidebar-collapse': collapse }" style="display: flex;justify-content: space-between;padding-left: 20px;padding-right: 20px;">
     <div style="display: flex;align-items: center;">
-      <div style="display: flex;justify-content: center;align-items: center" @click="appStore.switchSidebarCollapse()">
+      <n-el style="display: flex;justify-content: center;align-items: center;color: var(--text-color-1);transition: .3s var(--cubic-bezier-ease-in-out);" @click="appStore.switchSidebarCollapse()">
         <n-icon size="18" v-if="collapse">
-          <n-el :tag="MenuUnfoldOutlined" class="n-el-icon" />
+          <MenuUnfoldOutlined></MenuUnfoldOutlined>
         </n-icon>
         <n-icon size="18" v-else>
-          <n-el :tag="MenuFoldOutlined" class="n-el-icon" />
+          <MenuFoldOutlined></MenuFoldOutlined>
         </n-icon>
-      </div>
+      </n-el>
       <n-breadcrumb>
         <n-breadcrumb-item>
           系统设置

@@ -5,8 +5,10 @@ import {
   RightOutlined,
   DownOutlined,
 } from '@vicons/antd';
+import { GameControllerOutline, GameController } from '@vicons/ionicons5'
 const appStore = useAppStore()
 const collapse = computed(() => appStore.sidebarCollapse);
+const nameRef = ref()
 const panels = ref(["首页", "用户管理", "权限管理", "部门管理", "字典管理"])
 const options = [
   {
@@ -55,7 +57,7 @@ const handleSelect =  (key: string | number) => {
   <n-el class="tags" :class="{'tags-sidebar-collapse': collapse }">
     <n-tabs
         ref="tabs1"
-        v-model:value="value"
+        v-model:value="nameRef"
         type="card"
         :closable="true"
         :tab-style="{'min-width': '60px','justify-content':'center'}"
@@ -66,22 +68,22 @@ const handleSelect =  (key: string | number) => {
       </n-tab>
       <template #prefix>
         <n-el class="prev" @click="scrollPrev">
-          <n-icon size="16" color="#515a6e">
-            <n-el :tag="LeftOutlined" class="n-el-icon" />
+          <n-icon size="16">
+            <LeftOutlined></LeftOutlined>
           </n-icon>
         </n-el>
       </template>
       <template #suffix>
         <n-space>
           <n-el class="next" @click="scrollNext">
-            <n-icon size="16" color="#515a6e">
-              <n-el :tag="RightOutlined" class="n-el-icon" />
+            <n-icon size="16">
+              <RightOutlined></RightOutlined>
             </n-icon>
           </n-el>
           <n-dropdown trigger="hover" :options="options" @select="handleSelect">
             <n-el class="next">
-              <n-icon size="16" color="#515a6e">
-                <n-el :tag="DownOutlined" class="n-el-icon" />
+              <n-icon size="16">
+                <DownOutlined></DownOutlined>
               </n-icon>
             </n-el>
           </n-dropdown>
@@ -108,9 +110,13 @@ const handleSelect =  (key: string | number) => {
     .n-tabs-tab{
       height: 31px;
       border-radius: 3px;
+      &:hover {
+        border: 1px solid var(--primary-color) !important;
+      }
     }
     .n-tabs-tab--active {
       border: 1px solid var(--primary-color) !important;
+      //background-color: var(--n-item-color-active)!important;
       &:hover {
 
       }
@@ -138,6 +144,7 @@ const handleSelect =  (key: string | number) => {
     box-sizing: border-box;
     transition: .3s var(--cubic-bezier-ease-in-out);
     border: 1px solid var(--border-color) !important;
+    color: var(--text-color-1);
     .n-icon {
       display: flex;
       align-items: center;

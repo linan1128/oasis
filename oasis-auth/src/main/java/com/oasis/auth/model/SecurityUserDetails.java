@@ -15,6 +15,9 @@ public class SecurityUserDetails implements UserDetails {
     private SysUser sysUser;
 
     List<String> permissions;
+
+    private String token;
+
     public SecurityUserDetails(SysUser sysUser, List<String> permissions) {
         this.sysUser = sysUser;
         this.permissions = permissions;
@@ -68,5 +71,13 @@ public class SecurityUserDetails implements UserDetails {
 
     public void setSysUser(SysUser sysUser) {
         this.sysUser = sysUser;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

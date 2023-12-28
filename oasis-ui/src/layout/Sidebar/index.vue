@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useMessage,MenuInst  } from 'naive-ui'
 import { useAppStore } from '@/store/app.ts'
 import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
@@ -48,7 +49,7 @@ const menus = [
   },
 ]
 
-const selectedKeys = ref(null)
+const selectedKeys = ref<string>(route.path as string);
 const handleUpdateValue = (key: any, item: any) => {
   router.push({ path: key });
 }
@@ -58,6 +59,14 @@ onMounted(() => {
   autoAnimate(logoRef.value,{duration: 100})
 })
 const darkMod = computed(() => appStore.darkMod);
+const menuInstRef = ref<MenuInst | null>(null)
+watch(
+    () => route.fullPath,
+    () => {
+      selectedKeys.value =route.path as string;
+      menuInstRef.value?.showOption(route.path as string)
+    }
+);
 </script>
 
 <template>

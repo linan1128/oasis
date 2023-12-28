@@ -19,10 +19,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 public class SysAuthController {
-    @Resource
-    private AuthenticationManager authenticationManager;
-
-
 
     @Autowired
     private AuthService authService;

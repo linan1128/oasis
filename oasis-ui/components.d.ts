@@ -22,6 +22,7 @@ declare module 'vue' {
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
     NGi: typeof import('naive-ui')['NGi']
+    NGlobalStyle: typeof import('naive-ui')['NGlobalStyle']
     NGrid: typeof import('naive-ui')['NGrid']
     NGridItem: typeof import('naive-ui')['NGridItem']
     NIcon: typeof import('naive-ui')['NIcon']
