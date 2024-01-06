@@ -1,25 +1,25 @@
 package com.oasis.model.entity.system;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import com.oasis.model.entity.base.BaseEntity;
 
-@Data
 @TableName("`sys_user`")
-public class SysUser {
-    private static final long serialVersionUID = 1L;
-    private Long id;
+public class SysUser extends BaseEntity {
+    @TableId
+    private Long user_id;
     private String username;
     private String password;
     private String name;
     private String phone;
     private String avatar;
 
-    public Long getId() {
-        return id;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getUsername() {

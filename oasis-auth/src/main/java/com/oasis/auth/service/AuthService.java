@@ -3,8 +3,8 @@ package com.oasis.auth.service;
 
 import com.oasis.auth.model.SecurityUserDetails;
 import com.oasis.cache.redis.RedisCache;
+import com.oasis.common.constant.Constants;
 import com.oasis.model.entity.system.SysUser;
-import com.oasis.util.jwt.JwtUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +39,12 @@ public class AuthService {
         String token = UUID.randomUUID().toString().replaceAll("-", "");
         loginUser.setToken(token);
 
-        String userId = loginUser.getSysUser().getId().toString();
+//        String userId = loginUser.getSysUser().getId().toString();
         redisCache.setCacheObject("login_tokens:"+token,loginUser.getSysUser());
 
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put("login_user_key", token);
+        claims.put(Constants.LOGIN_USER_KEY, token);
 
 
         String secret = "qwerty";

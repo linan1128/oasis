@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { getToken } from '@/utils/auth'
 
-axios.defaults.headers.common['Content-Type'] = 'application/json;charset=utf-8'
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
 const instance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,
@@ -8,6 +9,12 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(function (config) {
+    if(getToken()){
+        config.headers['Authorization'] = 'Bearer ' + getToken()
+    }
+
+
+
     // 在发送请求之前做些什么
     return config;
 }, function (error) {

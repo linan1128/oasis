@@ -113,7 +113,7 @@ const data: TreeOption[] = [
         </n-card>
       </n-gi>
       <n-gi :span="4">
-        <div ref="formCardRef" style="transition: 0.5s linear;">
+        <div ref="formCardRef">
           <n-card content-style="padding-bottom: 0;padding-top:24px">
             <n-form
                 inline

@@ -23,16 +23,15 @@ public class SecurityUserDetails implements UserDetails {
         this.permissions = permissions;
     }
 
-    List<SimpleGrantedAuthority> authorities;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (authorities!=null){
-            return authorities;
-        }
-
-        authorities = permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-        return authorities;
+//        if (authorities!=null){
+//            return authorities;
+//        }
+//
+//        authorities = permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+//        return authorities;
+        return null;
     }
 
     @Override
@@ -79,5 +78,13 @@ public class SecurityUserDetails implements UserDetails {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
     }
 }

@@ -34,6 +34,14 @@ const routes: RouteRecordRaw[] = [
                 meta: {
                     title: '用户管理'
                 }
+            },
+            {
+                path: 'dept',
+                name: 'Dept',
+                component: () => import('@/views/system/dept/index.vue'),
+                meta: {
+                    title: '部门管理'
+                }
             }
         ]
     }

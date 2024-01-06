@@ -1,6 +1,7 @@
 package com.oasis.auth.config;
 
 import com.oasis.auth.filter.JwtAuthenticationTokenFilter;
+import com.oasis.auth.handler.LogoutSuccessHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+
+    @Autowired
+    private LogoutSuccessHandlerImpl logoutSuccessHandler;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -26,11 +30,14 @@ public class WebSecurityConfig {
         // 构建过滤链并返回
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/auth/login", "/auth/logout").permitAll()
+                        .antMatchers("/auth/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf().disable();
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.logout().logoutUrl("/auth/logout").logoutSuccessHandler(logoutSuccessHandler);
+
         return http.build();
     }
 

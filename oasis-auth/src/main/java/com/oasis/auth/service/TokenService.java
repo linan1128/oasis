@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TokenService {
-    @Autowired
-    private RedisCache redisCache;
+//    @Autowired
+//    private RedisCache redisCache;
 }
