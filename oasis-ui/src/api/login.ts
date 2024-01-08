@@ -2,7 +2,7 @@ import Axios from '@/utils/request.ts'
 
 export const login = (username:string, password:string) =>{
     return Axios({
-        url: '/auth/login',
+        url: '/login',
         method: 'post',
         data: {
             username,
@@ -12,13 +12,13 @@ export const login = (username:string, password:string) =>{
 }
 export const logout = () =>{
     return Axios({
-        url: '/auth/logout',
+        url: '/logout',
         method: 'post',
     })
 }
 export const getInfo = () =>{
     return Axios({
-        url: '/auth/getInfo',
+        url: '/getInfo',
         method: 'post',
     })
 }

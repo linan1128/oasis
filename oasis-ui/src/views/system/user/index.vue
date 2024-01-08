@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { NTag } from 'naive-ui'
 import { useElementSize , useWindowSize } from '@vueuse/core';
 import { TreeOption } from 'naive-ui'
 import {
   UpOutlined,
   DownOutlined,
 } from '@vicons/antd';
+import {getDeptTree, getUserList} from '@/api/system/user.ts'
+
 const formCardRef = ref<HTMLElement|any>(null)
 const formCollapsed = ref(true)
 const tableCardHeight = ref(0);
@@ -35,64 +36,48 @@ const formValue =  ref({
 const columns = [
   {
     title: 'id',
-    key: 'id',
+    key: 'userId',
   },
   {
-    title: '角色名称',
+    title: '用户名',
+    key: 'username',
+  },
+  {
+    title: '姓名',
     key: 'name',
   },
   {
-    title: '说明',
-    key: 'explain',
-  },
-  {
-    title: '是否默认角色',
-    key: 'isDefault',
-    render(row) {
-      return h(
-          NTag,
-          {
-            type: row.isDefault ? 'success' : 'error',
-          },
-          {
-            default: () => (row.isDefault ? '是' : '否'),
-          }
-      );
-    },
-  },
-  {
     title: '创建时间',
-    key: 'create_date',
+    key: 'createDate',
   },
 ];
 
 
 const pattern = ref('')
 
-const data: TreeOption[] = [
-  {
-    label: '总公司',
-    key: '0',
-    children: [
-      {
-        label: '子公司1',
-        key: '0-0',
-        children: [
-          { label: '子公司1-部门1', key: '0-0-0' },
-          { label: '子公司1-部门2', key: '0-0-1' }
-        ]
-      },
-      {
-        label: '子公司2',
-        key: '0-1',
-        children: [
-          { label: '子公司2-部门1', key: '0-1-0' },
-          { label: '子公司2-部门2', key: '0-1-1' }
-        ]
-      }
-    ]
-  }
-]
+const deptTreeOption = ref([] as TreeOption[])
+
+getDeptTree().then((res)=>{
+  deptTreeOption.value = res.data
+})
+
+getUserList(null).then((res)=>{
+  console.log(res)
+})
+
+const data = ref([])
+const loading = ref(false)
+
+const getList = ()=>{
+  loading.value = true
+  getUserList(null).then((res)=>{
+    data.value = res.data
+    loading.value = false
+  })
+}
+
+getList()
+
 </script>
 
 <template>
@@ -106,8 +91,11 @@ const data: TreeOption[] = [
             <n-tree
                 :show-irrelevant-nodes="false"
                 :pattern="pattern"
-                :data="data"
+                :data="deptTreeOption"
+                key-field="id"
+                label-field="deptName"
                 block-line
+                default-expand-all
             />
           </n-space>
         </n-card>
@@ -187,9 +175,12 @@ const data: TreeOption[] = [
 
         <n-card style="margin-top: 16px;min-height: 300px" :style="{height:`${tableCardHeight}px`}">
           <n-data-table
+              size="small"
               :flex-height="true"
               :style="{ height: `100%` }"
               :columns="columns"
+              :loading="loading"
+              :data="data"
           />
         </n-card>
       </n-gi>
