@@ -1,10 +1,12 @@
 package com.oasis.admin.modules.system.model.entity.system;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.oasis.admin.modules.system.model.dto.SysDeptDTO;
 import com.oasis.admin.modules.system.model.entity.base.BaseEntity;
 
 public class SysDept extends BaseEntity {
+    @TableId
     private Long id;
     private Long parentId;
     private String parentIds;

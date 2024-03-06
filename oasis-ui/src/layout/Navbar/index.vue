@@ -3,6 +3,7 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@vicons/antd';
+import { Icon } from '@iconify/vue';
 import { useAppStore } from '@/store/app.ts'
 const appStore = useAppStore()
 const collapse = computed(() => appStore.sidebarCollapse);
@@ -19,6 +20,7 @@ const darkMod = computed(() => appStore.darkMod);
         <n-icon size="18" v-else>
           <MenuFoldOutlined></MenuFoldOutlined>
         </n-icon>
+        <MenuUnfoldOutlined></MenuUnfoldOutlined>
       </n-el>
       <n-breadcrumb>
         <n-breadcrumb-item>
@@ -30,7 +32,16 @@ const darkMod = computed(() => appStore.darkMod);
       </n-breadcrumb>
     </div>
     <div style="display: flex;justify-content: center;align-items: center">
-      <n-space align="center">
+
+      <n-space align="center" :item-style="{display:'flex','align-item':'center'}">
+        <n-icon size="18">
+          <Icon icon="simple-icons:gitee" />
+        </n-icon>
+        <n-icon size="18">
+          <Icon icon="ant-design:github-outlined" />
+        </n-icon>
+
+
         <div style="display: flex;justify-content: center;align-items: center">
           <n-button size="small" @click="appStore.switchDarkMod()">{{darkMod?'浅色':'深色'}}</n-button>
         </div>

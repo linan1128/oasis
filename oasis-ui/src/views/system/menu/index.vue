@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DataTableColumns } from 'naive-ui'
-import { getDeptList } from '@/api/system/dept.ts'
+import { getMenuList } from '@/api/system/menu.ts'
 import { FormInst,NButton,NSpace } from 'naive-ui'
 const formValue =  ref({
   deptName: '',
@@ -8,24 +8,18 @@ const formValue =  ref({
 })
 type RowData = {
   id: number
-  deptName: string
+  menuName: string
   sort:number
   children?: RowData[]
 }
-
-const showTable = ref(false)
 
 const data = ref([] as RowData[])
 const loading = ref(false)
 
 const getList = ()=>{
   loading.value = true
-  getDeptList(formValue.value).then((res)=>{
-    showTable.value= false
+  getMenuList(formValue.value).then((res)=>{
     data.value = res.data
-    //fix table default-expand-all
-    showTable.value= true
-
     loading.value = false
   })
 }
@@ -35,15 +29,21 @@ getList()
 
 const columns: DataTableColumns<RowData> = [
   {
-    title: '部门名称',
-    key: 'deptName'
+    title: '菜单名称',
+    key: 'menuName'
   },
-  {
-    title: 'id',
-    key: 'id'
+  { title: '组件路径',
+    key: 'component'
   },
+  { title: '路由地址',
+    key: 'path'
+  },
+  // {
+  //   title: 'id',
+  //   key: 'id'
+  // },
   {
-    title: 'Action',
+    title: '操作',
     key: 'actions',
     render(row) {
       return h(NSpace,{},{default: () => {
@@ -55,7 +55,7 @@ const columns: DataTableColumns<RowData> = [
               size: 'small',
               onClick: () => {console.log(row)}
             },
-            {default: () => 'Play'}
+            {default: () => '编辑'}
         ),h(
             NButton,
             {
@@ -64,7 +64,7 @@ const columns: DataTableColumns<RowData> = [
               size: 'small',
               onClick: () => {}
             },
-            {default: () => 'Play'}
+            {default: () => '删除'}
         )]
         }})
     }
@@ -89,6 +89,7 @@ const rowKey = (row: RowData) => { return row.id}
 
 const model = ref({
   inputValue: null,
+  icon: null,
   textareaValue: null,
   selectValue: null,
   multipleSelectValue: null,
@@ -372,11 +373,9 @@ const options = [
     <n-data-table
         size="small"
         :loading="loading"
-        v-if="showTable"
         :columns="columns"
         :data="data"
         :row-key="rowKey"
-        default-expand-all
     />
   </n-card>
   <n-modal
@@ -408,31 +407,63 @@ const options = [
             label-width="auto"
             require-mark-placement="right-hanging"
         >
-          <n-form-item label="上级部门" path="inputValue">
+          <n-form-item label="菜单类型" path="radioGroupValue">
+            <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup1">
+              <n-radio-button value="Radio 1">
+                目录
+              </n-radio-button>
+              <n-radio-button value="Radio 2">
+                菜单
+              </n-radio-button>
+              <n-radio-button value="Radio 3">
+                按钮
+              </n-radio-button>
+            </n-radio-group>
+          </n-form-item>
+          <n-form-item label="图标" path="icon">
+            <n-popselect v-model:value="model.icon" :options="[]" trigger="click">
+<!--              <n-button>弹出选择</n-button>-->
+              <n-input></n-input>
+<!--              <template #header>-->
+<!--                不知道放些什么-->
+<!--              </template>-->
+              <template #empty>
+                没啥看的，这里是空的
+              </template>
+<!--              <template #action>-->
+<!--                如果你点开了这个例子，你可能需要它-->
+<!--              </template>-->
+            </n-popselect>
+          </n-form-item>
+
+          <n-form-item label="上级菜单" path="inputValue">
             <n-tree-select
                 v-model:value="model.inputValue"
                 :options="options"
                 default-value="Drive My Car"
             />
           </n-form-item>
-          <n-form-item label="部门名称" path="textareaValue">
+          <n-form-item label="菜单名称" path="textareaValue">
             <n-input v-model:value="model.textareaValue" placeholder="请填写部门名称" />
           </n-form-item>
           <n-form-item label="排序" path="inputNumberValue">
             <n-input-number v-model:value="model.inputNumberValue" />
           </n-form-item>
-          <n-form-item label="状态" path="radioGroupValue">
-            <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup1">
-              <n-space>
-                <n-radio value="Radio 1">
-                  Radio 1
-                </n-radio>
-                <n-radio value="Radio 2">
-                  Radio 2
-                </n-radio>
-              </n-space>
-            </n-radio-group>
-          </n-form-item>
+<!--          <n-form-item label="状态" path="radioGroupValue">-->
+<!--            <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup1">-->
+<!--              <n-space>-->
+<!--                <n-radio value="Radio 1">-->
+<!--                  Radio 1-->
+<!--                </n-radio>-->
+<!--                <n-radio value="Radio 2">-->
+<!--                  Radio 2-->
+<!--                </n-radio>-->
+<!--              </n-space>-->
+<!--            </n-radio-group>-->
+<!--          </n-form-item>-->
+
+
+
 
 
         </n-form>

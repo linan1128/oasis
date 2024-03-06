@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useAppStore } from '@/store/app.ts'
+import { useTagsViewStore,RouteItem } from '@/store/tagsView.ts';
+import { useRoute, useRouter } from 'vue-router';
 import {
   LeftOutlined,
   RightOutlined,
@@ -7,9 +9,13 @@ import {
 } from '@vicons/antd';
 import { GameControllerOutline, GameController } from '@vicons/ionicons5'
 const appStore = useAppStore()
+const tagsViewStore = useTagsViewStore();
+const route = useRoute();
+const router = useRouter();
 const collapse = computed(() => appStore.sidebarCollapse);
 const nameRef = ref()
-const panels = ref(["首页", "用户管理", "权限管理", "部门管理", "字典管理"])
+const tabsList: any = computed(() => tagsViewStore.tabsList);
+const panels = ref([])
 const options = [
   {
     label: '刷新当前',
@@ -30,8 +36,14 @@ const options = [
 ]
 
 let tabs1 = ref();
-const handleClose = () => {
-
+const handleClose = (name: any) => {
+  const routeInfo = tabsList.value.find((item: any) => item.fullPath == name);
+  tagsViewStore.closeCurrentTab(routeInfo);
+  if(name == route.fullPath){
+    const currentRoute = tabsList.value[Math.max(0, tabsList.value.length - 1)];
+    nameRef.value = currentRoute.fullPath;
+    router.push(currentRoute);
+  }
 }
 const scrollPrev = () => {
   let leftValue = tabs1.value.xScrollInstRef.selfRef.scrollLeft-tabs1.value.scrollWrapperElRef.scrollWidth
@@ -50,6 +62,26 @@ const scrollNext = () => {
 const handleSelect =  (key: string | number) => {
 
 }
+function handleClick (value: any) {
+  router.push({ path: value });
+
+}
+function handleContextMenu(e: any, item: any){
+  e.preventDefault();
+  console.log(item)
+}
+const getSimpleRoute = (route: any): RouteItem => {
+  const { fullPath, hash, meta, name, params, path, query } = route;
+  return { fullPath, hash, meta, name, params, path, query };
+};
+watch(
+    () => route.fullPath,
+    (to) => {
+      nameRef.value = to
+      tagsViewStore.addTabs(getSimpleRoute(route))
+    },
+    { immediate: true }
+);
 
 </script>
 
@@ -62,10 +94,26 @@ const handleSelect =  (key: string | number) => {
         :closable="true"
         :tab-style="{'min-width': '60px','justify-content':'center'}"
         @close="handleClose"
+        @update:value="handleClick"
     >
-      <n-tab v-for="panel in panels" :key="panel" :name="panel">
-        {{ panel }}
-      </n-tab>
+      <template v-for="tab in tabsList">
+        <n-tab
+            v-if="tab.path != '/index'"
+            closable
+            :name="tab.fullPath"
+            @contextmenu="handleContextMenu($event, tab)"
+        >
+          {{tab.meta.title}}
+        </n-tab>
+
+        <n-tab
+            v-else
+            :name="tab.fullPath"
+            @contextmenu="handleContextMenu($event, tab)"
+        >
+          {{tab.meta.title}}
+        </n-tab>
+      </template>
       <template #prefix>
         <n-el class="prev" @click="scrollPrev">
           <n-icon size="16">

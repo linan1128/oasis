@@ -1,7 +1,10 @@
 package com.oasis.admin.modules.system.model.entity.system;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class SysRoleMenu {
+    @TableId
     private Long id;
     private Long role_id;
     private Long menu_id;

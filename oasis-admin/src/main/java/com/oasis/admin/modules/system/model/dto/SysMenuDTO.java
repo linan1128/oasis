@@ -1,36 +1,33 @@
-package com.oasis.admin.modules.system.model.entity.system;
+package com.oasis.admin.modules.system.model.dto;
+import com.oasis.admin.modules.system.model.TreeNode;
 
-
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.oasis.admin.modules.system.model.dto.SysDeptDTO;
-import com.oasis.admin.modules.system.model.dto.SysMenuDTO;
-import com.oasis.admin.modules.system.model.entity.base.BaseEntity;
-
-public class SysMenu extends BaseEntity {
-    @TableId
+public class SysMenuDTO extends TreeNode<SysMenuDTO> {
     private Long id;
     private Long parentId;
     private String menuName;
     private Integer menuType;
-
     private String component;
     private String path;
     private String icon;
     private String permissions;
     private Integer sort;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public Long getParentId() {
         return parentId;
     }
 
+    @Override
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
@@ -90,19 +87,4 @@ public class SysMenu extends BaseEntity {
     public void setSort(Integer sort) {
         this.sort = sort;
     }
-
-    public SysMenuDTO toSysMenuDTO() {
-        SysMenuDTO sysMenuDTO = new SysMenuDTO();
-        sysMenuDTO.setId(this.getId());
-        sysMenuDTO.setParentId(this.getParentId());
-        sysMenuDTO.setMenuName(this.getMenuName());
-        sysMenuDTO.setMenuType(this.getMenuType());
-        sysMenuDTO.setComponent(this.getComponent());
-        sysMenuDTO.setPath(this.getPath());
-        sysMenuDTO.setIcon(this.getIcon());
-        sysMenuDTO.setPermissions(this.getPermissions());
-        sysMenuDTO.setSort(this.getSort());
-        return sysMenuDTO;
-    }
-
 }

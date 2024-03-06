@@ -1,6 +1,7 @@
 package com.oasis.admin.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oasis.admin.common.utils.TreeUtils;
 import com.oasis.admin.modules.system.mapper.SysDeptMapper;

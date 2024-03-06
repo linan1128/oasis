@@ -1,56 +1,63 @@
 <script setup lang="ts">
 import { useMessage,MenuInst  } from 'naive-ui'
 import { useAppStore } from '@/store/app.ts'
+import { usePermissionStore } from '@/store/permission.ts'
 import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 const appStore = useAppStore()
+const permissionStore = usePermissionStore()
 const collapse = computed(() => appStore.sidebarCollapse);
-const menus = [
-  {
-    label: '首页',
-    key: '/index',
-  },
-  {
-    label: '系统管理',
-    key: 'system',
-    children: [
-      {
-        label: '用户管理',
-        key: '/system/user'
-      },
-      {
-        label: '部门管理',
-        key: '/system/dept'
-      },
-      {
-        label: '菜单管理',
-        key: '/system/menu'
-      },
-      {
-        label: '权限管理',
-        key: '/system/role'
-      }
-    ]
-  },
-  {
-    label: '菜单一',
-    key: 'menu1',
-    children: [
-      {
-        label: '子菜单1',
-        key: 'subMenu1'
-      },
-      {
-        label: '子菜单2',
-        key: 'subMenu2'
-      }
-    ]
-  },
-]
+
+const menus = ref(permissionStore.sidebarMenus)
+console.log(menus)
+
+// const menus = [
+//   {
+//     label: '首页',
+//     key: '/index',
+//   },
+//   {
+//     label: '系统管理',
+//     key: 'system',
+//     children: [
+//       {
+//         label: '用户管理',
+//         key: '/system/user'
+//       },
+//       {
+//         label: '部门管理',
+//         key: '/system/dept'
+//       },
+//       {
+//         label: '菜单管理',
+//         key: '/system/menu'
+//       },
+//       {
+//         label: '权限管理',
+//         key: '/system/role'
+//       }
+//     ]
+//   },
+//   {
+//     label: '菜单一',
+//     key: 'menu1',
+//     children: [
+//       {
+//         label: '子菜单1',
+//         key: 'subMenu1'
+//       },
+//       {
+//         label: '子菜单2',
+//         key: 'subMenu2'
+//       }
+//     ]
+//   },
+// ]
 
 const selectedKeys = ref<string>(route.path as string);
 const handleUpdateValue = (key: any, item: any) => {
+  console.log(item.key)
   router.push({ path: key });
 }
 import autoAnimate from "@formkit/auto-animate"
@@ -63,6 +70,7 @@ const menuInstRef = ref<MenuInst | null>(null)
 watch(
     () => route.fullPath,
     () => {
+      console.log(route)
       selectedKeys.value =route.path as string;
       menuInstRef.value?.showOption(route.path as string)
     }

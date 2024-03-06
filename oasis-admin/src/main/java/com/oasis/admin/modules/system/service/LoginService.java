@@ -27,8 +27,8 @@ public class LoginService {
     @Autowired
     private RedisUtils redisCache;
 
-    public String login(SysUser user) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+    public String login(String username, String password) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         //校验失败了
         if(Objects.isNull(authentication)){
             throw new RuntimeException("用户名或密码错误！");

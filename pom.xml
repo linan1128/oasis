@@ -21,10 +21,10 @@
         <hutool.version>5.8.23</hutool.version>
         <sa-token.version>1.37.0</sa-token.version>
         <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+        <dynamic-datasource.version>4.3.0</dynamic-datasource.version>
         <jjwt.version>0.9.1</jjwt.version>
         <fastjson2.version>2.0.43</fastjson2.version>
         <druid-version>1.2.20</druid-version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -42,19 +42,14 @@
                 <version>${hutool.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-spring-boot-starter</artifactId>
-                <version>${sa-token.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-redis-jackson</artifactId>
-                <version>${sa-token.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-datasource.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -71,11 +66,6 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
@@ -87,14 +77,6 @@
                 <configuration>
                     <source>1.8</source> <!-- depending on your project -->
                     <target>1.8</target> <!-- depending on your project -->
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
-                        </path>
-                        <!-- other annotation processors -->
-                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,6 +1,12 @@
 import { defineStore } from 'pinia'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { login, logout, getInfo } from '@/api/login'
+
+interface UserInfo {
+    username: string,
+    password: string
+}
+
 export const useUserStore = defineStore({
     id: 'user',
     state: () => ({
@@ -8,7 +14,7 @@ export const useUserStore = defineStore({
         name: '',
     }),
     actions: {
-        login(userInfo) {
+        login(userInfo:UserInfo) {
             const username = userInfo.username.trim()
             const password = userInfo.password
             return new Promise<void>((resolve, reject) => {
@@ -22,5 +28,11 @@ export const useUserStore = defineStore({
                 })
             })
         },
+        logout() {
+
+        },
+        getUserInfo() {
+            
+        }
     }
 })

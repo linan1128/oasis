@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
 import Content from "@/components/Application/content.vue";
-import {useAppStore} from "@/store/app.ts";
+import {useAppStore} from "@/store/app";
 const appStore = useAppStore();
 const darkMod = computed(() => appStore.darkMod);
 

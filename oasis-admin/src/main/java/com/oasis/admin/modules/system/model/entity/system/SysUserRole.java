@@ -1,6 +1,9 @@
 package com.oasis.admin.modules.system.model.entity.system;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class SysUserRole {
+    @TableId
     private Long id;
     private Long user_id;
     private Long role_id;

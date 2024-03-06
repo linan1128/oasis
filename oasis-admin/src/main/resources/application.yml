@@ -2,12 +2,26 @@ server:
   port: 8080
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.17.101:3306/oasis?useSSL=false&useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: root
-    druid:
-      validation-query: SELECT 1 FROM DUAL
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        master:
+          url: jdbc:mysql://192.168.17.101:3306/oasis?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+          druid:
+            validation-query: SELECT 1 FROM DUAL
+        slave_1:
+          url: jdbc:mysql://192.168.17.101:3306/oasis?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+          druid:
+            validation-query: SELECT 1 FROM DUAL
   redis:
     # 地址
     host: 192.168.17.101
